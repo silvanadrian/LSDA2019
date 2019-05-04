@@ -13,3 +13,6 @@ htmlcov
 mnist
 
 **/logs/
+
+**/data/*.csv
+**/data/*.mat
