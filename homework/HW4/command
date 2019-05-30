@@ -1,0 +1,1 @@
+$HADOOP_HOME/bin/hadoop  jar /srv/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.7.jar -mapper mapper.py -reducer reducer.py -file mapper.py -file reducer.py -input airline_data/2016_*.csv  -output output 
