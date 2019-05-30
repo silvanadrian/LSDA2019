@@ -14,5 +14,5 @@ for line in sys.stdin:
         if flight[8] is "":
             arr_delay = 0.0
         else:
-            arr_delay = float(flight[6])
+            arr_delay = float(flight[8])
         print('%s\t%s' % (airline_id, arr_delay))

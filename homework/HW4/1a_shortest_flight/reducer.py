@@ -14,6 +14,6 @@ for line in sys.stdin:
     if dict[airline_id] > float(distance):
         dict[airline_id] = float(distance)
 
-
+print('ID\tShortest Distance')
 for airline_id, flight_distance in dict.items():
     print('%s\t%s' % (airline_id, flight_distance))
