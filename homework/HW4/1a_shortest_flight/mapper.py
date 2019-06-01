@@ -8,8 +8,7 @@ def preprocess(line):
 for line in sys.stdin:
     if re.match(".FL_DATE.", line):
         continue
-    else:
-        flight = preprocess(line)
-        airline_id = int(flight[1])
-        flight_distance = float(flight[10])
-        print('%s\t%s' % (airline_id, flight_distance))
+    flight = preprocess(line)
+    airline_id = int(flight[1])
+    flight_distance = float(flight[10])
+    print('%s\t%s' % (airline_id, flight_distance))
