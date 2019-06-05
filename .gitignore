@@ -17,3 +17,4 @@ mnist
 **/data/*.csv
 **/data/*.mat
 **/airline_data/*.csv
+**/spam_ham/*

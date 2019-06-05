@@ -5,7 +5,7 @@ import sys
 def add(array, x):
     array[0] += 1
 
-    # self.new_m = self.old_m + (x - self.old_m) / self.n
+    # new_m = old_m + (x - old_m) / n
     array[2] = array[1] + (x - array[1]) / array[0]
     array[4] = array[3] + (x - array[1]) * (x - array[2])
 

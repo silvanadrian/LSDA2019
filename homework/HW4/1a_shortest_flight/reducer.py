@@ -1,19 +1,30 @@
 #!/usr/bin/env python3
 import sys
 
-dict = dict()
+shortest_distance = sys.maxsize
+old_air_id = None
+
+print('ID\tShortest Distance')
 for line in sys.stdin:
     data = line.strip().split("\t")
     if len(data) != 2:
-        # Something has gone wrong. Skip this line.
         continue
 
     airline_id, distance = data
-    if airline_id not in dict.keys():
-        dict[airline_id] = float(distance)
-    if dict[airline_id] > float(distance):
-        dict[airline_id] = float(distance)
+    try :
+        airline_id = int(airline_id)
+        distance = float(distance)
+    except ValueError:
+        continue
 
-print('ID\tShortest Distance')
-for airline_id, flight_distance in dict.items():
-    print('%s\t%s' % (airline_id, flight_distance))
+    if (old_air_id is not None) and (old_air_id != airline_id):
+        print('%s\t%s' % (old_air_id, shortest_distance))
+        shortest_distance = sys.maxsize
+        old_air_id = None
+
+    old_air_id = airline_id
+    if (distance < shortest_distance):
+        shortest_distance = distance
+
+if old_air_id is not None:
+    print('%s\t%s' % (old_air_id, shortest_distance))

@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 import sys
-import re
 
 def preprocess(line):
-    return line.split(",")
+    return line.strip().split(",")
 
 for line in sys.stdin:
-    if re.match(".FL_DATE.", line):
-        continue
-    else:
-        flight = preprocess(line)
+
+    flight = preprocess(line)
+
+    if flight[8] == "":
+        flight[8] = 0
+
+    try:
         airline_id = int(flight[1])
-        if flight[8] is "":
-            arr_delay = 0.0
+        arr_delay = float(flight[8])
+        if arr_delay > 0:
+            arr_delay = 1
         else:
-            arr_delay = float(flight[6])
-        print('%s\t%s' % (airline_id, arr_delay))
+            arr_delay = 0
+    except ValueError as e:
+        continue
+    print('%s\t%s' % (airline_id, arr_delay))
