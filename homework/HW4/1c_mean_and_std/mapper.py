@@ -10,9 +10,12 @@ for line in sys.stdin:
         continue
     else:
         flight = preprocess(line)
-        airline_id = int(flight[1])
-        if flight[8] is "":
-            arr_delay = 0.0
-        else:
-            arr_delay = float(flight[8])
+        try:
+            airline_id = int(flight[1])
+            if flight[8] is "":
+                arr_delay = 0.0
+            else:
+                arr_delay = float(flight[8])
+        except ValueError:
+            continue
         print('%s\t%s' % (airline_id, arr_delay))

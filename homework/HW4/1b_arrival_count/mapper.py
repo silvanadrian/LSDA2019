@@ -18,6 +18,6 @@ for line in sys.stdin:
             arr_delay = 1
         else:
             arr_delay = 0
-    except ValueError as e:
+    except ValueError:
         continue
     print('%s\t%s' % (airline_id, arr_delay))

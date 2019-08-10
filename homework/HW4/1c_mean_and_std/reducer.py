@@ -22,21 +22,28 @@ def variance(array):
 def std(array):
     return math.sqrt(variance(array))
 
-dict = dict()
+calculations = [1,0.0,0.0,0,0]
+old_air_id = None
+print('ID\tMean\tStandard Deviation')
 for line in sys.stdin:
     data = line.strip().split("\t")
     if len(data) != 2:
-        # Something has gone wrong. Skip this line.
         continue
 
-    airline_id = int(data[0])
-    delay = float(data[1])
-    if airline_id not in dict.keys():
-        # n / old_m / new_m / old_s / new_s
-        dict[airline_id] = [1,delay,delay,0,0]
-    else:
-        dict[airline_id] = add(dict[airline_id],delay)
+    airline_id, arr_delay = data
+    try:
+        airline_id = int(airline_id)
+        arr_delay = float(arr_delay)
+    except ValueError:
+        continue
 
-print('ID\tMean\tStandard Deviation')
-for airline_id, flight_distance in dict.items():
-    print('%s\t%s\t%s' % (airline_id, mean(flight_distance),std(flight_distance)))
+    if (old_air_id is not None) and (old_air_id != airline_id):
+        print('%s\t%s\t%s' % (old_air_id,mean(calculations),std(calculations)))
+        calculations = [1,arr_delay,arr_delay,0,0]
+        old_air_id = None
+    
+    old_air_id = airline_id
+    calculations = add(calculations,arr_delay)
+
+if old_air_id is not None:
+    print('%s\t%s\t%s' % (airline_id,mean(calculations),std(calculations)))

@@ -6,13 +6,16 @@ def preprocess(line):
     return line.split(",")
 
 for line in sys.stdin:
-    if re.match(".FL_DATE.", line):
-        continue
-    else:
+    try:
         flight = preprocess(line)
         airline_id = int(flight[1])
         if flight[8] is "":
             arr_delay = 0.0
         else:
             arr_delay = float(flight[8])
-        print('%s\t%s' % (airline_id, arr_delay))
+            if arr_delay < 0.0:
+            	continue
+    except ValueError:
+    	continue
+
+    print('%s\t%s' % (arr_delay, airline_id))
