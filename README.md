@@ -1,1 +1,1 @@
-# Large-sacle data analysis (DIKU/UCPH) 2019
+# Large-scale data analysis (DIKU/UCPH) 2019
